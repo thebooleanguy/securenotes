@@ -21,7 +21,13 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note createNote(String content) {
-        return null;
+        User currentUser = getCurrentAuthenticatedUser();
+
+        Note note = new Note();
+        note.setContent(content);
+        note.setUser(currentUser);
+
+        return noteRepository.save(note);
     }
 
     @Override
