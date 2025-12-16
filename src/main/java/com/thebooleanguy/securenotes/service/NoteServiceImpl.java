@@ -32,12 +32,13 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<Note> getMyNotes() {
-        return List.of();
+        User currentUser = getCurrentAuthenticatedUser();
+        return noteRepository.findByUser(currentUser);
     }
 
     @Override
     public List<Note> getAllNotesForAdmin() {
-        return List.of();
+        return noteRepository.findAll();
     }
 
     private User getCurrentAuthenticatedUser() {
