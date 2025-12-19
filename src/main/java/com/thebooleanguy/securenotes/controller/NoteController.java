@@ -23,14 +23,10 @@ public class NoteController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Note note) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
         return ResponseEntity.ok(noteService.createNote(note.getContent()));
     }
 
     public List<Note> getMyNotes() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
         return noteService.getMyNotes();
     }
 }
