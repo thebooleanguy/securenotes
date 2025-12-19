@@ -1,5 +1,6 @@
 package com.thebooleanguy.securenotes.controller;
 
+import com.thebooleanguy.securenotes.model.DTOs.CreateNoteRequest;
 import com.thebooleanguy.securenotes.model.Note;
 import com.thebooleanguy.securenotes.service.NoteService;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class NoteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Note note) {
-        return ResponseEntity.ok(noteService.createNote(note.getContent()));
+    public ResponseEntity<?> create(@RequestBody CreateNoteRequest request) {
+        return ResponseEntity.ok(noteService.createNote(request.getContent()));
     }
 
     @GetMapping
