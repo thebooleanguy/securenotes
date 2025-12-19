@@ -6,6 +6,7 @@ import com.thebooleanguy.securenotes.repository.NoteRepository;
 import com.thebooleanguy.securenotes.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,6 +55,6 @@ public class NoteServiceImpl implements NoteService {
         String username = auth.getName();
 
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
 }
