@@ -4,10 +4,7 @@ import com.thebooleanguy.securenotes.model.Note;
 import com.thebooleanguy.securenotes.service.NoteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,7 @@ public class NoteController {
         return ResponseEntity.ok(noteService.createNote(note.getContent()));
     }
 
+    @GetMapping
     public List<Note> getMyNotes() {
         return noteService.getMyNotes();
     }
