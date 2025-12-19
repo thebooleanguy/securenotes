@@ -4,6 +4,7 @@ import com.thebooleanguy.securenotes.model.Note;
 import com.thebooleanguy.securenotes.model.User;
 import com.thebooleanguy.securenotes.repository.NoteRepository;
 import com.thebooleanguy.securenotes.repository.UserRepository;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -48,8 +49,8 @@ public class NoteServiceImpl implements NoteService {
     private User getCurrentAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (auth == null || !auth.isAuthenticated()) {
-            throw new RuntimeException("No authenticated user found");
+        if (auth == null || auth instanceof AnonymousAuthenticationToken) {
+            throw new RuntimeException("Unauthenticated");
         }
 
         String username = auth.getName();
