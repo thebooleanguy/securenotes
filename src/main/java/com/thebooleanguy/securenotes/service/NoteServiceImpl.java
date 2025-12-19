@@ -4,9 +4,12 @@ import com.thebooleanguy.securenotes.model.Note;
 import com.thebooleanguy.securenotes.model.User;
 import com.thebooleanguy.securenotes.repository.NoteRepository;
 import com.thebooleanguy.securenotes.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteServiceImpl implements NoteService {
@@ -42,7 +45,15 @@ public class NoteServiceImpl implements NoteService {
     }
 
     private User getCurrentAuthenticatedUser() {
-        // placeholder for JWT-based user resolution
-        return null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new RuntimeException("No authenticated user found");
+        }
+
+        String username = auth.getName();
+
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found: " + username));
     }
 }
