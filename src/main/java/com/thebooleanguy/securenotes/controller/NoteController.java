@@ -4,7 +4,6 @@ import com.thebooleanguy.securenotes.model.DTOs.CreateNoteRequest;
 import com.thebooleanguy.securenotes.model.Note;
 import com.thebooleanguy.securenotes.service.NoteService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
