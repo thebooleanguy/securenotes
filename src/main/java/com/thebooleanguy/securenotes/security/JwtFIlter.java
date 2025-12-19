@@ -1,6 +1,5 @@
 package com.thebooleanguy.securenotes.security;
 
-import com.thebooleanguy.securenotes.model.User;
 import com.thebooleanguy.securenotes.service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,11 +17,11 @@ import java.io.IOException;
 public class JwtFIlter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-    private final CustomUserDetailsService customUserDetailsService;
+    private final CustomUserDetailsService userDetailsService;
 
-    public JwtFIlter(JwtUtil jwtUtil, CustomUserDetailsService customUserDetailsService) {
+    public JwtFIlter(JwtUtil jwtUtil, CustomUserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
-        this.customUserDetailsService = customUserDetailsService;
+        this.userDetailsService = userDetailsService;
     }
 
 
@@ -44,7 +43,7 @@ public class JwtFIlter extends OncePerRequestFilter {
 
         if (username != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             // Check JWT's validity
             if (jwtUtil.isTokenValid(token, userDetails)) {
