@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/notes")
 public class NoteController {
@@ -24,5 +26,11 @@ public class NoteController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         return ResponseEntity.ok(noteService.createNote(note.getContent()));
+    }
+
+    public List<Note> getMyNotes() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return noteService.getMyNotes();
     }
 }
