@@ -29,5 +29,15 @@ public class DataLoader implements CommandLineRunner {
             userRepository.save(user);
             System.out.println("✅ Test user created: admin / admin123");
         }
+
+        if (userRepository.findByUsername("user").isEmpty()) {
+            User user = new User();
+            user.setUsername("user");
+            user.setPassword(passwordEncoder.encode("user123"));
+            user.setRole(Role.valueOf("USER"));
+
+            userRepository.save(user);
+            System.out.println("✅ Test user created: user / user123");
+        }
     }
 }
