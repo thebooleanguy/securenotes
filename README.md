@@ -19,25 +19,19 @@ Built as a mini backend project to refresh and demonstrate core backend, securit
 
 ## 🛠 Tech Stack
 
-- Java 17+
+- Java 25
 - Spring Boot
 - Spring Security
 - JWT
 - Spring Data JPA / Hibernate
-- H2 / MySQL (configurable)
+- H2
 - Maven
 
 ---
 
 ## 🧱 Architecture
 
-Client
-  |
-  v
-Security Filter (JWT Validation)
-  |
-  v
-Controller -> Service -> Repository -> Database
+Client -> Security Filter (JWT Validation) -> Controller -> Service -> Repository -> Database
 
 - Controller: REST endpoints
 - Service: Business logic + SecurityContext usage
@@ -174,7 +168,6 @@ http://localhost:8080
 
 ## 🌱 Possible Improvements
 
-- DTOs instead of entities in controllers
 - Global exception handling (ControllerAdvice)
 - Refresh tokens
 - Pagination & sorting
